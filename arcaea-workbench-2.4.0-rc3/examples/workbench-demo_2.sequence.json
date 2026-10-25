@@ -1,0 +1,204 @@
+{
+  "format": "arcaea-input-sequence/1",
+  "algorithm_version": "snapshot-1.2",
+  "chart": "workbench-demo_2.aff",
+  "sha256": "dabaae79033e725627800c540f42637d0be26f0df9eb8e75f51426a7c0d4c773",
+  "coordinate_system": "x=AFF; y=(1+4.5*AFF_y)/8.5; floor_y=0",
+  "time_unit": "milliseconds in AFF clock; AudioOffset not applied",
+  "certified_for_max": false,
+  "preferences": {
+    "alternate_below_ms": 200,
+    "alternate_weight": 12,
+    "arc_color_weight": 24,
+    "natural_start_weight": 18,
+    "checkpoint_weight": 30,
+    "hold_side_weight": 0,
+    "comfort_weight": 9,
+    "burst_relief": 1,
+    "pair_relief": 0.95,
+    "pair_distance_scale": 0.2,
+    "flow_consistency_weight": 12,
+    "pair_strategy_prior": 3,
+    "ground_aversion_weight": 12,
+    "territory_weight": 5,
+    "obstruction_weight": 10,
+    "color_hands": [
+      "L",
+      "R"
+    ],
+    "reset_min_ms": 160,
+    "reset_gap_multiplier": 8,
+    "reset_move_ms": 500
+  },
+  "configuration": {
+    "repeat_tau_seconds": 0.12,
+    "repeat_power": 2,
+    "movement_cost": "distance / available_seconds",
+    "side_preference_weight": 0.005,
+    "multifinger_review_gap_ms": 200,
+    "retained_color_reuse": false,
+    "join_endpoint_time_tolerance_ms": 1
+  },
+  "structure_sha256": "3e305084c0ca663edfe4ba11b998c81a40d6cedfc187ffb3f5f72e6550bbcdfe",
+  "extraction": {
+    "adjacent_arc_groups": [],
+    "single_tick_releases": [],
+    "hidden_input_policy": "exclude_fully_hidden_source_events_for_intent_review_only",
+    "hidden_source_event_ids": [],
+    "zero_duration_arc_ids": [],
+    "composites": [],
+    "chain_joins": [],
+    "continuity_bridges": [],
+    "rounded_duplicate_arcs": [],
+    "unpositioned_actions": []
+  },
+  "multitouch": {
+    "model": "full_contact_conservative_upper_demand_not_judgement_proof",
+    "episodes": [],
+    "windows": [],
+    "default_metric_policy": "separate_candidates_from_confirmed_exclusion_masks",
+    "path_policy": "do_not_connect_across_excluded_windows"
+  },
+  "review_windows": [],
+  "visual_review_markers": [],
+  "mechanic_review": [],
+  "summary": {
+    "objective": 19.903646971646374,
+    "unresolved_units": 0,
+    "beam_width": 128,
+    "retained_final_alternatives": 1,
+    "chart": "workbench-demo_2.aff",
+    "units": 16,
+    "assigned_units": 16,
+    "manual_excluded_units": 0,
+    "review_windows": 0,
+    "composite_units": 0,
+    "zero_duration_arcs": 0
+  },
+  "flow_context": {
+    "reset_threshold_ms": 160,
+    "resets": [
+      {
+        "start_ms": 1000,
+        "end_ms": 1500
+      },
+      {
+        "start_ms": 1500,
+        "end_ms": 2000
+      },
+      {
+        "start_ms": 2000,
+        "end_ms": 2500
+      },
+      {
+        "start_ms": 2500,
+        "end_ms": 3000
+      },
+      {
+        "start_ms": 4000,
+        "end_ms": 5000
+      },
+      {
+        "start_ms": 6000,
+        "end_ms": 7000
+      },
+      {
+        "start_ms": 8000,
+        "end_ms": 9000
+      },
+      {
+        "start_ms": 10000,
+        "end_ms": 11000
+      }
+    ],
+    "reset_motion_policy": "direct_transfer_no_forced_neutral_detour",
+    "hold_policy": "full_source_duration",
+    "reset_state_policy": "clear_assignment_state_keep_archival_history_reset_travel_unscored",
+    "execution_templates": [
+      "LR",
+      "RL",
+      "LLRR",
+      "LRRL",
+      "RRLL",
+      "RLLR"
+    ],
+    "tap_runs": [
+      [
+        "T10:floor_tap",
+        "T11:floor_tap",
+        "T12:floor_tap",
+        "T13:floor_tap",
+        "T14:floor_tap",
+        "T15:floor_tap"
+      ]
+    ],
+    "spatial_double_taps": []
+  },
+  "arc_geometry": [
+    {
+      "id": 7,
+      "start_ms": 5000,
+      "end_ms": 6000,
+      "geometry": {
+        "x0": 0.2,
+        "x1": 0.8,
+        "y0": 0.4,
+        "y1": 0.4,
+        "curve": "s"
+      },
+      "color_raw": "0",
+      "group": 0
+    },
+    {
+      "id": 8,
+      "start_ms": 7000,
+      "end_ms": 8000,
+      "geometry": {
+        "x0": 0.25,
+        "x1": 0.25,
+        "y0": 0.5,
+        "y1": 0.5,
+        "curve": "s"
+      },
+      "color_raw": "1",
+      "group": 0
+    },
+    {
+      "id": 9,
+      "start_ms": 9000,
+      "end_ms": 10000,
+      "geometry": {
+        "x0": 0.2,
+        "x1": 0.8,
+        "y0": 0.4,
+        "y1": 0.6,
+        "curve": "s"
+      },
+      "color_raw": "0",
+      "group": 0
+    }
+  ],
+  "limitations": {
+    "not_an_official_judgement_emulator": true,
+    "scene_controls_not_projected": [],
+    "no_hardware_or_perspective_model": true
+  },
+  "units": [
+    {"unit_id":"T1:floor_tap","kind":"floor_tap","start_ms":1000,"end_ms":1000,"hand":"L","start_position":[-0.25,0.0],"end_position":[-0.25,0.0],"source_event_ids":[1],"action_ids":["1:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T2:floor_tap","kind":"floor_tap","start_ms":1500,"end_ms":1500,"hand":"R","start_position":[1.25,0.0],"end_position":[1.25,0.0],"source_event_ids":[2],"action_ids":["2:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T3:floor_tap","kind":"floor_tap","start_ms":2000,"end_ms":2000,"hand":"L","start_position":[0.25,0.0],"end_position":[0.25,0.0],"source_event_ids":[3],"action_ids":["3:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T4:floor_tap","kind":"floor_tap","start_ms":2500,"end_ms":2500,"hand":"R","start_position":[0.75,0.0],"end_position":[0.75,0.0],"source_event_ids":[4],"action_ids":["4:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"H5","kind":"hold","start_ms":3000,"end_ms":4000,"hand":"L","start_position":[-0.25,0.0],"end_position":[-0.25,0.0],"source_event_ids":[5],"action_ids":["5:hold_activation"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T6:floor_tap","kind":"floor_tap","start_ms":3500,"end_ms":3500,"hand":"R","start_position":[1.25,0.0],"end_position":[1.25,0.0],"source_event_ids":[6],"action_ids":["6:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"A7","kind":"arc","start_ms":5000,"end_ms":6000,"hand":"L","start_position":[0.2,0.32941176470588235],"end_position":[0.8,0.32941176470588235],"source_event_ids":[7],"action_ids":[],"arc_color":"0","fresh_press":false},
+    {"unit_id":"A8","kind":"arc","start_ms":7000,"end_ms":8000,"hand":"R","start_position":[0.25,0.38235294117647056],"end_position":[0.25,0.38235294117647056],"source_event_ids":[8],"action_ids":[],"arc_color":"1","fresh_press":false},
+    {"unit_id":"A9","kind":"arc","start_ms":9000,"end_ms":10000,"hand":"L","start_position":[0.2,0.32941176470588235],"end_position":[0.8,0.4352941176470588],"source_event_ids":[9],"action_ids":[],"arc_color":"0","fresh_press":false},
+    {"unit_id":"T9:0","kind":"sky_tap","start_ms":9500,"end_ms":9500,"hand":"R","start_position":[0.5,0.38235294117647056],"end_position":[0.5,0.38235294117647056],"source_event_ids":[9],"action_ids":["9:0"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T10:floor_tap","kind":"floor_tap","start_ms":11000,"end_ms":11000,"hand":"L","start_position":[-0.25,0.0],"end_position":[-0.25,0.0],"source_event_ids":[10],"action_ids":["10:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T11:floor_tap","kind":"floor_tap","start_ms":11125,"end_ms":11125,"hand":"R","start_position":[1.25,0.0],"end_position":[1.25,0.0],"source_event_ids":[11],"action_ids":["11:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T12:floor_tap","kind":"floor_tap","start_ms":11250,"end_ms":11250,"hand":"L","start_position":[-0.25,0.0],"end_position":[-0.25,0.0],"source_event_ids":[12],"action_ids":["12:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T13:floor_tap","kind":"floor_tap","start_ms":11375,"end_ms":11375,"hand":"R","start_position":[1.25,0.0],"end_position":[1.25,0.0],"source_event_ids":[13],"action_ids":["13:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T14:floor_tap","kind":"floor_tap","start_ms":11500,"end_ms":11500,"hand":"L","start_position":[-0.25,0.0],"end_position":[-0.25,0.0],"source_event_ids":[14],"action_ids":["14:floor_tap"],"arc_color":null,"fresh_press":true},
+    {"unit_id":"T15:floor_tap","kind":"floor_tap","start_ms":11625,"end_ms":11625,"hand":"R","start_position":[1.25,0.0],"end_position":[1.25,0.0],"source_event_ids":[15],"action_ids":["15:floor_tap"],"arc_color":null,"fresh_press":true}
+  ]
+}

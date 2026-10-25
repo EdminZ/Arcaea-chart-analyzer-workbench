@@ -1,0 +1,9 @@
+Arcaea Workbench 2.4 RC3
+
+Open docs/USER_MANUAL.html for the rewritten guide.
+Windows: INSTALL_DEPENDENCIES.cmd, then START_WINDOWS.cmd.
+Python 3.10+ with Tk is required. This is not a standalone executable.
+Start with Assets & Batch -> Load bundled example.
+For maintenance see docs/MAINTAINER_GUIDE.html.
+No game data is required for the synthetic demo.
+License: CC BY-NC 4.0. See LICENSE and NOTICE.md.

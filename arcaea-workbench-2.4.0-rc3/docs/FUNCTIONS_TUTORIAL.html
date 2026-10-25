@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Editing difficulty functions</title><style>body{margin:0;background:#eef2f6;color:#203047;font:17px/1.65 system-ui,sans-serif}main{max-width:980px;margin:24px auto;padding:32px;background:white;border-radius:12px}h1{line-height:1.25}h2{margin-top:2em;border-top:1px solid #ccd5df;padding-top:1em}a{color:#175ca0}code,pre{background:#eef2f6}code{padding:2px 4px}pre{padding:15px;overflow:auto}.table{overflow:auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd5df;text-align:left;padding:9px}li{margin:8px 0}nav{font-size:14px} @media(max-width:600px){main{margin:0;padding:18px}}</style><main><nav><a href="USER_MANUAL.html">User guide</a> · <a href="FUNCTIONS_TUTORIAL.html">Functions</a> · <a href="MAINTAINER_GUIDE.html">Maintainer guide</a></nav><h1>Editing difficulty functions</h1>
+<h2>A first experiment</h2>
+<ol><li>Generate/open the synthetic demo.</li>
+<li>Difficulty Functions → Load active. This loads a draft from the current model.</li>
+<li>Change tap_power from 1.0 to 1.2 in the parameters. Use the existing parameter controls, or edit JSON and choose Refresh controls from JSON.</li>
+<li>Plot the response and choose Compare on chart. This compares a trial without replacing the active result.</li>
+<li>Save draft if you want to keep editing later. To adopt it, choose Validate &amp; activate, then Update current chart (or batch Update difficulty).</li>
+<li>To return, use Restore version and recalculate. Export definition saves a portable model JSON.</li>
+</ol>
+<p>Because both responses share a normalization reference, changing one curve can rescale the other. Do not assume that increasing one parameter increases every chart metric. Inspect the comparison.</p>
+<h2>What the axes mean</h2>
+<p>The response graph uses corrected speed v = sqrt(dx² + (vertical_scale*dy)²) / interval_seconds. Its tap channel represents transfer movement between successive contacts; it is not the frequency of tapping. Input frequency is computed separately. Arc response describes movement during a sustained contact.</p>
+<p>Sequence y is already (1 + 4.5*AFF_y)/8.5. vertical_scale is an additional factor, default 0.5, not measured hardware geometry. Speed cap / X max defaults to 4 and affects calculations as well as the plot. Shared response normalization defaults on and uses maximum 1; integrated chart metrics can exceed 1. Capped/clipped intervals appear in warnings.</p>
+<p>For context, a corrected displacement of 0.2 over 0.1 seconds gives speed 2. A displacement of 0.3 over 0.08 seconds gives 3.75. These are examples, not limits on legal gameplay.</p>
+<h2>Controls by effect</h2>
+<div class="table"><table>
+<tr><th>Setting</th><th>Changes</th></tr>
+<tr><td>Response expression or piecewise curve</td><td>Intensity assigned to speed</td></tr>
+<tr><td>vertical_scale</td><td>Movement distances and low-motion classification</td></tr>
+<tr><td>speed_limit</td><td>Saturation and graph range</td></tr>
+<tr><td>frequency_window_ms / movement_window_ms</td><td>Signal aggregation windows</td></tr>
+<tr><td>peak_min_ms / near_peak_ratio</td><td>Peak duration qualification</td></tr>
+<tr><td>arc_threshold</td><td>Low-motion path-length threshold for volume handling</td></tr>
+<tr><td>Trajectory smoothing / axis view</td><td>Display only</td></tr>
+<tr><td>Recognition tolerance/profile</td><td>Execution inference; rerun recognition separately</td></tr>
+</table></div>
+<p>The JSON metrics map defines aggregations; default note=max(frequency_mean,frequency_mode), Peak=frequency_peak, distance=total_weight, movement=movement_peak and Arc=arc_weight. Read app/model2.py before introducing a new raw measurement. The evaluator supports restricted expressions and piecewise curves, not arbitrary Python. Keep movement response zero at zero speed.</p>
+<h2>Reproducible comparisons</h2>
+<p>Save the model JSON, sequence and recognition profile with exported results. A reference difficulty CSV does not calibrate these functions. Dataset normalization and a calibrated overall rating remain research tasks. Use held-out charts if tuning against player judgments; record alternative acceptable executions rather than declaring every automatic label correct.</p></main></html>

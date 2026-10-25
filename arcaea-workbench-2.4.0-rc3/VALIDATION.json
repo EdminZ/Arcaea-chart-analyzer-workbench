@@ -1,0 +1,38 @@
+{
+  "version": "2.4.0-rc3",
+  "date": "2026-10-25",
+  "environment": {
+    "python": "3.12.14",
+    "platform": "Linux"
+  },
+  "workbench_tests": {
+    "passed": 114
+  },
+  "core_tests": {
+    "passed": 62
+  },
+  "integration": {
+    "synthetic_export_rows_current": 100,
+    "source_unchanged": true,
+    "demo_arc_paths": 3,
+    "demo_preview_current": true,
+    "demo_metrics_current": true
+  },
+  "not_verified": [
+    "Native Windows/Tk interactions",
+    "ArcCreate playback",
+    "Hosted GitHub Actions execution"
+  ],
+  "changes": "Public packaging, synthetic assets and rewritten documentation; recognition and metric semantics retained from RC2.",
+  "packaging_update": {
+    "date": "2026-10-26",
+    "license": "CC-BY-NC-4.0",
+    "scope": "License/documentation/archive-only changes; runtime and tests unchanged",
+    "checks": [
+      "License completeness",
+      "No obsolete MIT grant or publishing guides",
+      "Offline documentation links",
+      "Archive content hashes"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "songs": [
+    {
+      "id": "workbench-demo",
+      "title_localized": {
+        "en": "Workbench synthetic demo"
+      },
+      "difficulties": [
+        {
+          "ratingClass": 2,
+          "rating": 1
+        }
+      ]
+    }
+  ]
+}

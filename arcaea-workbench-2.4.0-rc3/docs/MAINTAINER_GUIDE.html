@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Taking over development</title><style>body{margin:0;background:#eef2f6;color:#203047;font:17px/1.65 system-ui,sans-serif}main{max-width:980px;margin:24px auto;padding:32px;background:white;border-radius:12px}h1{line-height:1.25}h2{margin-top:2em;border-top:1px solid #ccd5df;padding-top:1em}a{color:#175ca0}code,pre{background:#eef2f6}code{padding:2px 4px}pre{padding:15px;overflow:auto}.table{overflow:auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd5df;text-align:left;padding:9px}li{margin:8px 0}nav{font-size:14px} @media(max-width:600px){main{margin:0;padding:18px}}</style><main><nav><a href="USER_MANUAL.html">User guide</a> · <a href="FUNCTIONS_TUTORIAL.html">Functions</a> · <a href="MAINTAINER_GUIDE.html">Maintainer guide</a></nav><h1>Taking over development</h1>
+<h2>Scope and starting point</h2>
+<p>This is a local Python/Tk proof-of-concept, built iteratively with AI assistance and player review. It is suitable for experiments and forks. There is no hosted service, trained weight checkpoint, telemetry backend, or automatic learning system.</p>
+<p>Start by running the synthetic workflow and tests. Keep your workspace outside the repository. Change one layer at a time and preserve source identities and manual corrections. Reproduce a reported failure before tuning a heuristic.</p>
+<h2>Repository map</h2>
+<div class="table"><table>
+<tr><th>Path</th><th>Responsibility</th></tr>
+<tr><td>workbench.py</td><td>CLI arguments, workspace lock, GUI startup</td></tr>
+<tr><td>manage.py</td><td>Headless import/generate/recognize-arcs/calculate/preview/export</td></tr>
+<tr><td>app/gui.py, asset_ui.py, lab_ui.py</td><td>UI and background-task coordination</td></tr>
+<tr><td>app/store.py</td><td>Index, revisions, stage state, file routing and export</td></tr>
+<tr><td>app/adapters.py</td><td>Allocator/preview CLI boundary and integrated arc stage</td></tr>
+<tr><td>core/engine/audit.py, reconstruct.py</td><td>AFF syntax and reference input/judgment reconstruction</td></tr>
+<tr><td>core/engine/assign.py, preferences.py</td><td>Heuristic/beam hand allocation</td></tr>
+<tr><td>app/arc_solver.py</td><td>Fixed-assignment path optimization and endpoint pass</td></tr>
+<tr><td>app/sequence.py, arc_paths.py</td><td>Editable sequence and portable path validation</td></tr>
+<tr><td>app/model2.py, signals.py, difficulty.py</td><td>Feature extraction, evaluation, restricted functions</td></tr>
+<tr><td>app/metadata.py</td><td>Song/class identification and CSV constants</td></tr>
+<tr><td>app/aff_compat.py</td><td>Preview-only compatibility normalization</td></tr>
+<tr><td>defaults/</td><td>Model/profile defaults and synthetic metadata</td></tr>
+<tr><td>tests/, core/tests/</td><td>Workbench and core regressions</td></tr>
+</table></div>
+<h2>Data contracts</h2>
+<p>Original AFF bytes determine chart SHA256. Source event IDs refer to that exact parse; never transfer corrections to a changed chart without remapping/review. arcaea-input-sequence/1 is the core allocator interchange; arcaea-editable-sequence/2 is the operational editable document. arcaea-arc-paths/1 stores AFF-coordinate source/candidate arrays with a source hash and sequence binding. arcaea-difficulty/2 is the active frequency/movement definition; /1 compatibility behavior is retained.</p>
+<p>Do not confuse AFF y with sequence y. Time values use AFF milliseconds; AudioOffset is not applied to execution timestamps. Sequence reservations, input onsets and source arc geometry have different purposes. A geometry change must invalidate metrics/previews; changing review labels alone does not prove feasibility.</p>
+<p>The Store preserves revisions and writes individual files atomically. There is no multi-file transactional commit across SQLite and the filesystem. Absolute pointers, cross-file recovery and large-batch resume are known limitations. Current preprocess caching reuses chart-facts.json: if reconstruction semantics change, plan an explicit facts/cache migration rather than silently reusing it.</p>
+<h2>Extend a layer</h2>
+<p>Recognition: add a synthetic counterexample and a reviewed expected alternative, then modify the heuristic/preferences. The current arc stage runs after allocation; it cannot retroactively improve which hand was chosen. The path solver uses nominal tight timestamps with zero added timing slack. Non-null timing-tolerance/speed-limit settings are rejected, not silently used. Do not describe convergence as continuous-contact feasibility. Neutral/unknown/manual paths can be retained as fallbacks.</p>
+<p>Labeling: separate solver outcome, ownership, human review, mechanical uncertainty and extra-contact hypotheses. Prefer explicit reason/provenance fields. Preserve user edits and permit multiple acceptable solutions.</p>
+<p>Metrics: change JSON when the feature already exists; change the engine for new measurements. Bump feature/engine contracts and invalidate caches when semantics change. Recognition&#x27;s fixed movement objective is separate from customizable scoring curves. Window-count Peak still has boundary effects; a timestamp-rate replacement needs chord/rest/burst tests before adoption.</p>
+<p>Visualization: keep source drawings, execution paths and display smoothing distinct. Preserve original source files. Compatibility removals should be logged and limited to generated views. ArcCreate version-specific support needs actual playback validation.</p>
+<h2>Validation commands</h2>
+<p>From the repository root:</p>
+<pre><code>python -m unittest discover -s tests -q
+python -m unittest discover -s core/tests -q
+python tests/integration_release.py</code></pre>
+<p>The integration check creates temporary workspaces, evaluates the demo and exports 100 synthetic charts. Tests provide regression evidence, not player-validity certification. Verify native UI scaling, file dialogs, Unicode paths, Ctrl/Shift selection and ArcCreate playback separately.</p></main></html>

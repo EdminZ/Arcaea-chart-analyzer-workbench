@@ -1,0 +1,15 @@
+{
+  "format": "arcaea-recognition/1",
+  "coordinate_system": "AFF",
+  "tolerance_x": 0.1,
+  "tolerance_y": 0.25,
+  "feasibility_order": "timing_then_space",
+  "judgment_time_tolerance_ms": null,
+  "max_contact_speed_aff_per_s": null,
+  "allocator_preferences": {},
+  "solver_status": "reference_timing_prototype",
+  "notes": "Spatial tolerances are reference assumptions. Arc paths use nominal tight judgment times, no extra temporal slack or hard speed limit. Endpoint relaxation uses sampled interval containment, not game certification.",
+  "arc_path_enabled": true,
+  "endpoint_relaxation": true,
+  "endpoint_sample_ms": 4
+}

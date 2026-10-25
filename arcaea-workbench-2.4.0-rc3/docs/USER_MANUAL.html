@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>User guide — Arcaea Workbench 2.4 RC3</title><style>body{margin:0;background:#eef2f6;color:#203047;font:17px/1.65 system-ui,sans-serif}main{max-width:980px;margin:24px auto;padding:32px;background:white;border-radius:12px}h1{line-height:1.25}h2{margin-top:2em;border-top:1px solid #ccd5df;padding-top:1em}a{color:#175ca0}code,pre{background:#eef2f6}code{padding:2px 4px}pre{padding:15px;overflow:auto}.table{overflow:auto}table{border-collapse:collapse;width:100%}th,td{border:1px solid #ccd5df;text-align:left;padding:9px}li{margin:8px 0}nav{font-size:14px} @media(max-width:600px){main{margin:0;padding:18px}}</style><main><nav><a href="USER_MANUAL.html">User guide</a> · <a href="FUNCTIONS_TUTORIAL.html">Functions</a> · <a href="MAINTAINER_GUIDE.html">Maintainer guide</a></nav><h1>User guide — Arcaea Workbench 2.4 RC3</h1>
+<h2>1. What this project does</h2>
+<p>The Workbench explores a possible way of playing a chart and measures that proposed execution. You can correct the proposal and observe how the measurements change. It has no universal difficulty rating and does not learn automatically from importing more charts.</p>
+<p>The workflow is: original AFF → hand assignment → proposed arc path → editable execution sequence → metrics and visualizations. The chart&#x27;s drawn arc and the proposed finger path are different objects. Difficulty uses the saved execution sequence. Original AFF files are not rewritten by these operations.</p>
+<h2>2. Install and start</h2>
+<p>Extract the complete user ZIP into a writable folder. Do not launch from inside the ZIP. This is Python source, not an executable installer.</p>
+<p>Windows: install Python 3.10+ including Tk, then run INSTALL_DEPENDENCIES.cmd and START_WINDOWS.cmd. Both scripts select the Python launcher when available. The dependencies are NumPy and SciPy. CHECK_INSTALLATION.cmd runs diagnostics and tests; it is not required at every launch.</p>
+<p>macOS/Linux: use <code>python3 -m pip install -r requirements.txt</code>, then <code>sh start_unix.sh</code>. If Tk is absent, install it for that interpreter using your OS/Python distribution. If your Python prohibits global pip installation, create a virtual environment and run its Python directly.</p>
+<p>A default workspace is created in the application folder. To keep data outside the program, run <code>python workbench.py --workspace &quot;PATH_TO_WORKSPACE&quot;</code>. When using a virtual environment, launch with its interpreter so installed dependencies and runtime match.</p>
+<h2>3. First successful run</h2>
+<ol><li>In Assets &amp; Batch, click <strong>Load bundled example</strong> and wait for the job to finish.</li>
+<li>Double-click the synthetic demonstration row. Sequence Editor displays the assigned operations.</li>
+<li>Open Results &amp; Export and inspect the metrics. The imported constant 1.0 is deliberately fictional; it is not a calibration target.</li>
+<li>Open Trajectory, choose <strong>Load current result</strong>, then <strong>Play / Pause</strong>. The horizontal axis is input frequency; the vertical axis is movement response. This is not a physical picture of the player&#x27;s hands.</li>
+<li>In Arc Paths, click <strong>Load file</strong> to inspect source and proposed arc geometry. Gray shows the source; blue shows the candidate.</li>
+<li>Return to Assets &amp; Batch, select the demo, then Results &amp; Export → <strong>Batch export selected assets</strong>. Choose a destination parent folder and open summary.csv in the new export folder.</li>
+</ol>
+<p>The demo contains alternating taps, a hold, moving and stationary arcs, an attached sky tap, and a short burst. It has no audio. ArcCreate preview playback needs an independently configured ArcCreate project and audio resource; it is not part of this first-run test.</p>
+<h2>4. Import real charts and reference constants</h2>
+<p>Choose a Song folder and click <strong>Scan folder</strong>. Scanning imports chart identities; it does not calculate them. Filenames such as song_id_2.aff or song_id/2.aff support metadata matching. Use <strong>Load songlist</strong> to import your metadata JSON. The public package includes only synthetic metadata.</p>
+<p>Set the Difficulty .csv path and click <strong>Load table</strong>. Required columns are PST, PRS, FTR, BYD/INS and ETR, with a title column or song_id. The supplied synthetic CSV demonstrates the layout. BYD/INS and ETR both map to the _3 convention, so do not fill both in the same row. Missing constants remain unknown. Use <strong>CSV match report</strong> for ambiguous titles; adding song_id resolves many ambiguities. The displayed integer rating and decimal reference constant are separate fields.</p>
+<h2>5. Batch generation and one CSV</h2>
+<p>Set class/text filters and optional inclusive constant bounds. Highest constant per title is chosen within the text/class selection before the range filter. Unknown candidate constants can exclude a title in highest-only mode.</p>
+<p>Click <strong>Select all shown</strong>, or use Ctrl-click and Shift-click. Then choose <strong>Generate allocation + preview</strong>. New charts get allocation, arc recognition, preview and difficulty calculation. Existing working sequences are preserved; this button is not a request to replace their allocation. Review log messages and status columns, including failures within otherwise completed batches.</p>
+<p>To recalculate saved sequences after a formula change, select them and choose <strong>Update difficulty</strong>. To intentionally replace assignments, use <strong>New allocation baseline</strong>; old revisions remain archived, but the active sequence changes. For arc recognition on an existing sequence use Arc Paths → Recognize arc paths per chart; the CLI also supports multiple chart IDs.</p>
+<p>Keep the charts selected, switch to Results &amp; Export, and choose <strong>Batch export selected assets</strong>. Open summary.csv in arcaea-export-… under your chosen destination. One row per selected chart includes reference chart_constant, computed metrics, provenance/status and errors. Blank values are not zero. Leave Include stale metric values off for current outputs. Additional detail files are exported alongside the consolidated CSV.</p>
+<h2>6. Read results correctly</h2>
+<div class="table"><table>
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>Reference constant</td><td>Number imported from your table; not predicted by this program</td></tr>
+<tr><td>note</td><td>Default maximum of active-period frequency mean and mode</td></tr>
+<tr><td>Peak</td><td>Duration-qualified frequency peak under the current window estimator</td></tr>
+<tr><td>distance</td><td>Integrated movement response; not literal finger travel distance</td></tr>
+<tr><td>movement</td><td>Peak of the movement signal</td></tr>
+<tr><td>Arc</td><td>Integrated contribution from arc movement</td></tr>
+<tr><td>Invalid volume</td><td>Estimated judgment inflation relative to operational input; based on reference judgment hypotheses</td></tr>
+<tr><td>Current / stale</td><td>Whether outputs match the saved inputs/definition; not a confidence score</td></tr>
+<tr><td>Reviewed</td><td>A human review label; not proof of mechanical feasibility</td></tr>
+</table></div>
+<p>Default functions are examples. Compare charts only under the same model and interpretation settings. Display smoothing changes the trajectory picture, not scores. Calculation caps can suppress differences between intense passages; inspect Movement warnings.</p>
+<h2>7. Correct assignments and paths</h2>
+<p>In Sequence Editor select an operation and change its hand/property. Autosave edits is initially enabled; otherwise use Save revision. Undo/Redo and History support review. Recalculate difficulty and regenerate previews after corrections. Structural edits may require Execution overlay instead of the coloring adapter.</p>
+<p>In Arc Paths, Recognize arc paths saves a new sequence revision and a generated asset. Load the displayed file to inspect it. The solver uses configurable ±0.1 x/±0.25 y reference regions by default. The endpoint pass can remove movement to exact starts/ends while retaining times, attached inputs and shared seams.</p>
+<p>Candidate points are editable as [time_ms, x, y] arrays in original AFF coordinates. Saving an asset alone does not apply it to execution. Edit → Save edited asset → review the changed path → mark it reviewed → Apply reviewed selected path. Point edits clear review. Stale sequence hashes or execution conflicts block application; reload/review against the current sequence. Automatically generated geometry can be recomputed; manually changed geometry is retained on reruns.</p>
+<p>For arc paths in AFF previews, blue means allocated left hand, red right hand, green unresolved ownership. Other green review markers can flag multitouch candidates or unresolved situations. Green alone does not establish a confirmed extra-finger requirement. In the Arc Paths comparison canvas blue simply means candidate geometry.</p>
+<h2>8. Files and backup</h2>
+<div class="table"><table>
+<tr><th>File/location</th><th>Purpose</th></tr>
+<tr><td>Original .aff</td><td>Source chart; kept unchanged</td></tr>
+<tr><td>Working .sequence.json</td><td>Active execution used for metrics and playback</td></tr>
+<tr><td>.arc-paths.json</td><td>Source/candidate paths, recognition profile and decisions</td></tr>
+<tr><td>.preview.aff / .overlay.aff</td><td>Generated ArcCreate views, normally beside the chart</td></tr>
+<tr><td>Workspace runs/revisions</td><td>Generation records and sequence history</td></tr>
+<tr><td>Workspace definitions</td><td>Draft and versioned active difficulty models</td></tr>
+<tr><td>summary.csv</td><td>Consolidated batch export</td></tr>
+</table></div>
+<p>The workspace index and external sequence/output folders belong together. Close the app before copying both for backup. Paths are currently absolute: moving a project may need manual path repair. Export is useful for sharing results but is not a full restorable workspace backup. A failed export must not be treated as a completed backup.</p>
+<h2>9. Troubleshooting</h2>
+<ul><li>Missing NumPy/SciPy: install requirements with the same interpreter used to start the app.</li>
+<li>Missing Tk: install Tk for that Python; pip alone usually is not the solution.</li>
+<li>Unknown metadata: verify song IDs, filenames and the loaded songlist; the demo metadata contains no real songs.</li>
+<li>Saved settings seem ineffective: a draft is not the active model. Activate, then recalculate. Recognition profiles require a recognition rerun, not just a new preview.</li>
+<li>Preview destination conflict: an ownership/hash receipt protects externally edited files. Move your manual copy aside, then generate; do not overwrite it blindly.</li>
+<li>ArcCreate rejects group attributes: the compatibility exporter removes the known unsupported tracecol/bare angle syntax only in previews, logging changes. Decorative effects may differ. Other new mechanics may still need adapter work.</li>
+<li>Windows UI or playback problem: report version, steps, traceback and a minimal synthetic reproduction. Native Windows/Tk and ArcCreate testing is still limited.</li>
+</ul>
+<p>See the maintainer guide if you want to change behavior beyond the exposed parameters.</p></main></html>

@@ -1,0 +1,41 @@
+{
+  "format": "arcaea-difficulty/1",
+  "name": "Experimental movement and frequency \u2014 NOT a calibrated rating",
+  "step_ms": 100,
+  "window_ms": 1000,
+  "denominator": "chart_span",
+  "candidate_policy": "exclude",
+  "parameters": {
+    "speed_scale": 1.0,
+    "speed_threshold": 0.0,
+    "speed_power": 1.0,
+    "frequency_scale": 1.0,
+    "epsilon": 1e-06,
+    "frequency_threshold": 5
+  },
+  "channels": {
+    "displacement": "speed_scale * max(0, movement-speed_threshold)**speed_power",
+    "operation_rate": "frequency_scale * nonarc_frequency"
+  },
+  "metrics": {
+    "distance": "displacement_mean",
+    "movement": "displacement_max",
+    "note": "nonarc_press_count/max(duration_s,epsilon)",
+    "Peak": "operation_rate_max",
+    "Arc": "arc_distance/max(total_distance,epsilon)",
+    "Peak_duration": "high_frequency_duration_max"
+  },
+  "temporal": {
+    "smoothed_displacement": {
+      "input": "displacement",
+      "operator": "mean",
+      "window_ms": 1000
+    },
+    "high_frequency_duration": {
+      "input": "operation_rate",
+      "operator": "time_above",
+      "window_ms": 1000,
+      "threshold": "frequency_threshold"
+    }
+  }
+}
