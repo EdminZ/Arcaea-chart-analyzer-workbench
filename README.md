@@ -1,5 +1,12 @@
 # Arcaea Workbench
 
+A note from the creator:
+
+This is my first "vibe coding" project, aimed at the quantitative analysis of Arcaea chart difficulty. The project is still in its early stages; much work remains to be done regarding its utility and extensibility. For instance, the current pattern-recognition algorithm fails to identify certain techniques—such as the "arc tech" found at the beginning of Abstruse Dilemma—and the difficulty-calculation model lacks sufficient granularity, as a truly effective set of quantitative metrics has yet to be implemented.
+As I am currently unable to make the necessary refinements myself, I have decided to open-source the project. I hope this serves those who are curious about this type of analysis, as well as players who are interested in pursuing similar work but aren't sure where to begin. It would be my honor if this project—or any work inspired by it—proves to be of significant value to the Arcaea community.
+
+The above is the only passage I left behind in this project. What follows are Astra's annotations:
+
 An experimental desktop workbench for exploring chart execution and difficulty attributes. It parses AFF charts, assigns contacts to hands, proposes arc paths, visualizes movement, and evaluates editable frequency/movement functions.
 
 **2.4.0-rc3 · public proof-of-concept · Python source distribution**
